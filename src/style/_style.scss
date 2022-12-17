@@ -1,4 +1,11 @@
-.title {
-  font-size: 100px;
-  color: black;
+:root{
+  box-sizing: border-box;
+  @media screen and ( max-width:  800px){
+    font-size: calc(1vw + .5em);
+  }
+}    
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
 }
