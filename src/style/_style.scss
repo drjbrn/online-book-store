@@ -10,6 +10,21 @@
     box-sizing: inherit;
 }
 
+html, 
+.page {
+  min-height: 100vh;
+}
+
 .page {
   font-family: 'Poppins', sans-serif;
+
+  > .footer {
+    position: sticky;
+    top: 100vh;
+  }
+}
+
+.container {
+  width: 95vw;
+  margin: 0 auto;
 }
