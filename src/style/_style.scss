@@ -1,16 +1,16 @@
-:root{
+:root {
   box-sizing: border-box;
-  @media screen and ( max-width:  800px){
-    font-size: calc(1vw + .5em);
+  @media screen and (max-width: 800px) {
+    font-size: calc(1vw + 0.5em);
   }
-}    
+}
 *,
 *::after,
-*::before{
-    box-sizing: inherit;
+*::before {
+  box-sizing: inherit;
 }
 
-html, 
+html,
 .page {
   min-height: 100vh;
 }
@@ -27,4 +27,13 @@ html,
 .container {
   width: 95vw;
   margin: 0 auto;
+}
+
+.logo {
+  text-decoration: none;
+
+  &__subtitle {
+    display: block;
+    font-size: 0.7rem;
+  }
 }
