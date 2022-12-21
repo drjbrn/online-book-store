@@ -2,14 +2,14 @@
 interface BooksList {
   title: string;
   authors: string;
-  description: string;
-  categories: string;
-  genres: string;
-  isbn13: number;
-  publishedDate: string;
+  description?: string;
+  categories?: string;
+  genres?: string;
+  isbn13?: number;
+  publishedDate?: string;
   price: number;
   image: string;
-  image2: string;
+  image2?: string;
   rating: number;
 }
 
@@ -269,8 +269,7 @@ const books: BooksList[] = [
     isbn13: 9780989711654,
     publishedDate: '2022-05-22',
     price: 2.99,
-    image:
-      'https://d1b14unh5d6w7g.cloudfront.net/098971165X.01.S001.LXXXXXXX.jpg?Expires=1671187193&Signature=DnYgi2vCrpIchhwRcYlTYxQpnBa5yR-gCzdvOf~WQPMt2ycWcplKyHjwC2Js0ZUerj9MMFyJ~rIsXzoc8~4LHxA1NoM07oTe5fCWZkuP9q0Gh-iXsPRpvOz26O~upWC1ffOFgd5G8KsLv0l6dfZ4I06MhKM5TPzCkNY3pU8z0ec_&Key-Pair-Id=APKAIUO27P366FGALUMQ',
+    image: 'https://m.media-amazon.com/images/I/71RZapPW7pL.jpg',
     image2: 'https://m.media-amazon.com/images/I/61XE88yWXIL.jpg',
     rating: 5
   },
@@ -427,7 +426,7 @@ const books: BooksList[] = [
                   Purchase of the print book includes a free eBook in PDF, Kindle, and ePub formats from Manning Publications.`,
     categories: 'Computers & Technology',
     genres: 'Architecture & Microprocessors',
-    isbn13: 9781781575703,
+    isbn13: 9781617292231,
     publishedDate: '2014-12-31',
     price: 27.99,
     image: 'https://m.media-amazon.com/images/I/91p7WLtvCAL.jpg',
@@ -480,4 +479,4 @@ const books: BooksList[] = [
   }
 ];
 
-export default books;
+export { BooksList, books };
