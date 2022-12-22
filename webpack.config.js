@@ -17,14 +17,17 @@ module.exports = {
   devServer: {
     port: 3000,
     open: true,
-    hot: true
+    hot: true,
+    historyApiFallback: true,
+
   },
 
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    publicPath: '/'
   },
 
   plugins: [

@@ -1,4 +1,7 @@
 import './index.html';
 import './index.scss';
+import Router from './modules/Router/Router';
 
-import './components/catalog-cards/catalog-cards';
+const router = new Router();
+
+router.init();
