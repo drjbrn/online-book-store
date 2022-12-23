@@ -11,6 +11,7 @@ interface BooksList {
   image: string;
   image2?: string;
   rating: number;
+  stock?: number;
 }
 
 const books: BooksList[] = [
@@ -28,7 +29,8 @@ const books: BooksList[] = [
     image: 'https://tornightfire.com/wp-content/uploads/2021/09/What-Moves-The-Dead.jpeg',
     image2:
       'https://m.media-amazon.com/images/S/aplus-media-library-service-media/cfb39ab2-cae1-4018-8eab-9a3672cfd185.__CR0,0,300,300_PT0_SX300_V1___.jpg',
-    rating: 4.4
+    rating: 4.4,
+    stock: 5
   },
   {
     title: 'Malice House',
@@ -43,7 +45,8 @@ const books: BooksList[] = [
       'https://static.wixstatic.com/media/f48a5e_becad43d6275483f86780d3c800cdaac~mv2.jpg/v1/fill/w_536,h_810,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Malice%20House.jpg',
     image2:
       'https://m.media-amazon.com/images/S/aplus-media-library-service-media/45596795-c89e-4c2f-98eb-a8cc49823db4.__CR0,0,300,300_PT0_SX300_V1___.jpeg',
-    rating: 4.0
+    rating: 4.0,
+    stock: 4
   },
   {
     title: 'It: A Novel',
@@ -58,7 +61,8 @@ const books: BooksList[] = [
     price: 21.99,
     image: 'https://i2.wp.com/thenerddaily.com/wp-content/uploads/2019/10/It-by-Stephen-King.jpg',
     image2: 'https://media.newyorker.com/photos/59b3f875e899d754c57f4c35/master/w_2560%2Cc_limit/Rothman-IT.JPG',
-    rating: 4.4
+    rating: 4.4,
+    stock: 10
   },
   {
     title: 'A Dowry of Blood',
@@ -75,7 +79,8 @@ const books: BooksList[] = [
       'https://images.thalia.media/-/BF2000-2000/44c4a6a45f264e7f8c9a85c4004bb44c/a-dowry-of-blood-gebundene-ausgabe-s-t-gibson-englisch.jpeg',
     image2:
       'https://m.media-amazon.com/images/S/aplus-media-library-service-media/b50a6da0-f451-4876-b2ac-9a22cb537cc3.__CR0,0,800,800_PT0_SX300_V1___.png',
-    rating: 4.6
+    rating: 4.6,
+    stock: 7
   },
   {
     title: 'The Last House on Needless Street',
@@ -92,7 +97,8 @@ const books: BooksList[] = [
     price: 17.99,
     image: 'https://m.media-amazon.com/images/I/915ZEVEob-L.jpg',
     image2: 'https://m.media-amazon.com/images/I/91DpLVAx3YL.jpg',
-    rating: 4.2
+    rating: 4.2,
+    stock: 6
   },
   {
     title: 'Beyond Good and Evil',
@@ -106,7 +112,8 @@ const books: BooksList[] = [
     price: 12.99,
     image: 'https://m.media-amazon.com/images/I/61ajgqdPSYL.jpg',
     image2: 'https://media.s-bol.com/5Wm6Rw9ErXgR/RO1Y21O/550x825.jpg',
-    rating: 4.5
+    rating: 4.5,
+    stock: 12
   },
   {
     title: 'Sentient: How Animals Illuminate the Wonder of Our Human Senses',
@@ -120,7 +127,8 @@ const books: BooksList[] = [
     price: 18.99,
     image: 'https://m.media-amazon.com/images/I/81klcSWQdoL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71GOVXc1jOL.jpg',
-    rating: 4.3
+    rating: 4.3,
+    stock: 25
   },
   {
     title: 'Hell Bent',
@@ -134,7 +142,8 @@ const books: BooksList[] = [
     price: 26.99,
     image: 'https://m.media-amazon.com/images/I/71sm8UroasL.jpg',
     image2: 'https://pbs.twimg.com/media/FdQPeRMWQAAhsYR?format=jpg&name=medium',
-    rating: 5.0
+    rating: 5.0,
+    stock: 23
   },
   {
     title: 'The Butcher and The Wren',
@@ -149,7 +158,8 @@ const books: BooksList[] = [
     image: 'https://m.media-amazon.com/images/I/819g3sNOjXL.jpg',
     image2:
       'https://m.media-amazon.com/images/S/aplus-media-library-service-media/6e4aa4fe-0a92-4d3b-a866-0299d583fb67.__CR0,0,300,300_PT0_SX300_V1___.jpg',
-    rating: 4.1
+    rating: 4.1,
+    stock: 4
   },
   {
     title: 'Lassiter',
@@ -162,7 +172,8 @@ const books: BooksList[] = [
     price: 28.99,
     image: 'https://m.media-amazon.com/images/I/71izvplqhVL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71rN54gFgqL.jpg',
-    rating: 4.4
+    rating: 4.4,
+    stock: 15
   },
   {
     title: 'Twisted',
@@ -178,7 +189,8 @@ const books: BooksList[] = [
     price: 17.99,
     image: 'https://m.media-amazon.com/images/I/91oPXqapffL.jpg',
     image2: 'https://images.gr-assets.com/authors/1657807699p8/20245445.jpg',
-    rating: 4.5
+    rating: 4.5,
+    stock: 14
   },
   {
     title: 'Queen of Myth and Monsters',
@@ -192,7 +204,8 @@ const books: BooksList[] = [
     price: 14.99,
     image: 'https://m.media-amazon.com/images/I/81bYdicZy6L.jpg',
     image2: 'https://m.media-amazon.com/images/I/814sJ-inWDL.jpg',
-    rating: 4.2
+    rating: 4.2,
+    stock: 10
   },
   {
     title: "New Castle's Kadunce Murders: Mystery And The Devil in Northwest Pennsylvania",
@@ -205,7 +218,8 @@ const books: BooksList[] = [
     price: 23.99,
     image: 'https://m.media-amazon.com/images/I/716DvhuVJRL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71nq+am+5AL.jpg',
-    rating: 4.2
+    rating: 4.2,
+    stock: 20
   },
   {
     title: 'Mortal Danger: And Other True Cases',
@@ -218,7 +232,8 @@ const books: BooksList[] = [
     price: 7.99,
     image: 'https://m.media-amazon.com/images/I/81JsncKLCUL.jpg',
     image2: 'https://m.media-amazon.com/images/I/81UL9LIs68L.jpg',
-    rating: 3.8
+    rating: 3.8,
+    stock: 19
   },
   {
     title: 'The Ultimate Serial Killer Trivia Book',
@@ -236,7 +251,8 @@ const books: BooksList[] = [
     price: 14.9,
     image: 'https://m.media-amazon.com/images/I/71YI8Au3UbL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71zlIi4NstL.jpg',
-    rating: 4.5
+    rating: 4.5,
+    stock: 10
   },
   {
     title: 'Bloodmarked',
@@ -253,7 +269,8 @@ const books: BooksList[] = [
     image:
       'https://www.gannett-cdn.com/presto/2022/11/07/USAT/0a0b2354-cc14-4b9e-b9bf-1a576ed9eaa6-bloodmarked-9781534441637_xlg.jpeg?width=1588',
     image2: 'https://rivetedlit.com/wp-content/uploads/2022/08/MicrosoftTeams-image-17-scaled.jpeg',
-    rating: 4.9
+    rating: 4.9,
+    stock: 10
   },
   {
     title: 'Mystery In Rocky Mountain National Park',
@@ -271,7 +288,8 @@ const books: BooksList[] = [
     price: 2.99,
     image: 'https://m.media-amazon.com/images/I/71RZapPW7pL.jpg',
     image2: 'https://m.media-amazon.com/images/I/61XE88yWXIL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 7
   },
   {
     title: "King Solomon's Mines: (illustrated by A. C. Michael)",
@@ -289,7 +307,8 @@ const books: BooksList[] = [
     price: 2.2,
     image: 'https://m.media-amazon.com/images/I/51hfmWA4lwL.jpg',
     image2: 'https://m.media-amazon.com/images/I/51A-meJ-OlL.jpg',
-    rating: 4
+    rating: 4,
+    stock: 13
   },
   {
     title: 'Treasure Island (Signet Classics)',
@@ -302,7 +321,8 @@ const books: BooksList[] = [
     price: 2.91,
     image: 'https://m.media-amazon.com/images/I/711MBvrOJ8L.jpg',
     image2: 'https://i.etsystatic.com/12303878/r/il/ff49ad/3143602405/il_794xN.3143602405_spqq.jpg',
-    rating: 4
+    rating: 4,
+    stock: 10
   },
   {
     title: 'The Three Musketeers (Wordsworth Classics)',
@@ -318,7 +338,8 @@ const books: BooksList[] = [
     price: 1.19,
     image: 'https://m.media-amazon.com/images/I/81lD4bQ1PnL.jpg',
     image2: 'https://m.media-amazon.com/images/I/51OQ7lLnTpL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 5
   },
   {
     title: 'The Jungle Book: The Original Illustrated',
@@ -331,7 +352,8 @@ const books: BooksList[] = [
     price: 1.19,
     image: 'https://m.media-amazon.com/images/I/717ZKE8Z3iL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71fEB+PPXEL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 20
   },
   {
     title: 'The Lost World',
@@ -344,7 +366,8 @@ const books: BooksList[] = [
     price: 2.95,
     image: 'https://m.media-amazon.com/images/I/71IodSjKUEL.jpg',
     image2: 'https://m.media-amazon.com/images/I/61u7odQRtwL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 15
   },
   {
     title: 'Sword in the Stone',
@@ -357,7 +380,8 @@ const books: BooksList[] = [
     price: 2.99,
     image: 'https://m.media-amazon.com/images/P/000726349X.01._SCLZZZZZZZ_SX500_.jpg',
     image2: 'https://m.media-amazon.com/images/I/81xnxNNMaLL.jpg',
-    rating: 4
+    rating: 4,
+    stock: 14
   },
   {
     title: 'The Forgotten Beasts of Eld',
@@ -371,7 +395,8 @@ const books: BooksList[] = [
     price: 3.99,
     image: 'https://m.media-amazon.com/images/P/1616962771.01._SCLZZZZZZZ_SX500_.jpg',
     image2: 'https://m.media-amazon.com/images/I/61Nn60HBtYL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 2
   },
   {
     title: 'TensorFlow 2.0 in Action: Covers Tensorflow Version 2.9',
@@ -387,7 +412,8 @@ const books: BooksList[] = [
     image: 'https://m.media-amazon.com/images/I/61Oxx0S5F6L.jpg',
     image2:
       'https://m.media-amazon.com/images/S/aplus-media-library-service-media/ef59c53f-7292-4760-b60a-42acdf1da55b.__CR109,0,1455,900_PT0_SX970_V1___.png',
-    rating: 3
+    rating: 3,
+    stock: 1
   },
   {
     title: 'Programming Quantum Computers: Essential Algorithms and Code Samples',
@@ -401,7 +427,8 @@ const books: BooksList[] = [
     price: 34.99,
     image: 'https://m.media-amazon.com/images/I/710xqcSg2BL.jpg',
     image2: 'https://m.media-amazon.com/images/I/71YjY9nhHdL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 9
   },
   {
     title: "The Nostalgia Nerd's Retro Tech: Computer, Consoles & Games",
@@ -415,7 +442,8 @@ const books: BooksList[] = [
     price: 2.99,
     image: 'https://m.media-amazon.com/images/I/51ZWwUZqw1S.jpg',
     image2: 'https://m.media-amazon.com/images/I/81Uc6nxqPVL.jpg',
-    rating: 4
+    rating: 4,
+    stock: 25
   },
   {
     title: 'Grokking Algorithms',
@@ -431,7 +459,8 @@ const books: BooksList[] = [
     price: 27.99,
     image: 'https://m.media-amazon.com/images/I/91p7WLtvCAL.jpg',
     image2: 'https://m.media-amazon.com/images/I/816rnJwrvgL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 2
   },
   {
     title: 'Unity Game Development in 24 Hours, Sams Teach Yourself',
@@ -444,7 +473,8 @@ const books: BooksList[] = [
     price: 18.19,
     image: 'https://m.media-amazon.com/images/I/41BMc-bIjsL._SX380_BO1,204,203,200_.jpg',
     image2: 'https://i.libcats.org/covers/58000/1bd673dfb006f8102e259a5d9b404881-d.jpg',
-    rating: 5
+    rating: 5,
+    stock: 6
   },
   {
     title: 'Destiny: Grimoire Anthology - Dark Mirror',
@@ -458,7 +488,8 @@ const books: BooksList[] = [
     price: 16.14,
     image: 'https://m.media-amazon.com/images/I/718pXzWVPxL.jpg',
     image2: 'https://m.media-amazon.com/images/I/91sLqZnrVEL.jpg',
-    rating: 5
+    rating: 5,
+    stock: 8
   },
   {
     title: 'Retro Gaming: A Byte-sized History of Video Games – From Atari to Zelda',
@@ -475,7 +506,8 @@ const books: BooksList[] = [
     price: 6.78,
     image: 'https://m.media-amazon.com/images/I/715dv8jH1iL.jpg',
     image2: 'https://m.media-amazon.com/images/I/61TNax94X+L.jpg',
-    rating: 4
+    rating: 4,
+    stock: 10
   }
 ];
 
