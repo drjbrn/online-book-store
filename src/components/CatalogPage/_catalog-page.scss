@@ -1,0 +1,8 @@
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.7rem;
+}
+.filter{
+    background-color: green;
+}

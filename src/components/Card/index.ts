@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import { books, BooksList } from '../../modules/books';
-import { initRatings } from './rating-stars';
+import './_card.scss';
+import { BooksList } from '../../modules/books';
 
-const main = document.querySelector('.main') as HTMLElement;
-
-class ProductCards {
+class ProductCard {
   title: string;
   authors: string;
   price: number;
@@ -62,6 +59,7 @@ class ProductCards {
 
     const ratingActive = document.createElement('div');
     ratingActive.classList.add('rating__active');
+    ratingActive.style.width = `${Number(this.rating) / 0.05}%`;
 
     const ratingItems = document.createElement('div');
     ratingItems.classList.add('rating__items');
@@ -125,33 +123,8 @@ class ProductCards {
     wrapCards.append(cardDesc, btnCards);
     cardDesc.append(titleBook, authorsBook, cardRating, wrapPrice);
 
-    main.append(catalogCards);
+    return catalogCards;
   }
 }
 
-function createCatalogPage() {
-  for (let i = 0; i <= books.length; i++) {
-    const cards = new ProductCards(books[i]);
-    cards.createCard();
-    initRatings();
-  }
-}
-
-createCatalogPage();
-
-//create section for cards
-
-// const catalog = document.createElement('section');
-// catalog.classList.add('catalog');
-
-// const container = document.createElement('div');
-// container.classList.add('container');
-
-// const wrap = document.createElement('div');
-// wrap.classList.add('catalog__wrap');
-
-// main.append(catalog);
-// catalog.append(container);
-// container.append(wrap);
-
-export { ProductCards, createCatalogPage };
+export default ProductCard;
