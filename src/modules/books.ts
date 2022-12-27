@@ -3,8 +3,8 @@ interface BooksList {
   title: string;
   authors: string;
   description?: string;
-  categories?: string;
-  genres?: string;
+  categories: string;
+  genres: string;
   isbn13?: number;
   publishedDate?: string;
   price: number;
