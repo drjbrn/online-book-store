@@ -3,21 +3,21 @@
 import { books, BooksList } from '../../modules/books';
 import { initRatings } from './rating-stars';
 
-const main = document.querySelector('.main') as HTMLElement;
-
 class ProductCards {
   title: string;
   authors: string;
   price: number;
   image: string;
   rating: number;
+  section: HTMLElement;
 
-  constructor(card: BooksList) {
+  constructor(card: BooksList, section: HTMLElement) {
     this.title = card?.title;
     this.authors = card?.authors;
     this.price = card?.price;
     this.image = card?.image;
     this.rating = card?.rating;
+    this.section = section;
   }
 
   createCard() {
@@ -125,33 +125,32 @@ class ProductCards {
     wrapCards.append(cardDesc, btnCards);
     cardDesc.append(titleBook, authorsBook, cardRating, wrapPrice);
 
-    main.append(catalogCards);
+    this.section.append(catalogCards);
   }
 }
 
 function createCatalogPage() {
+  const main = document.querySelector('.main') as HTMLElement;
+  const catalog = document.createElement('section');
+  catalog.classList.add('catalog');
+
+  const container = document.createElement('div');
+  container.classList.add('container');
+
+  const wrap = document.createElement('div');
+  wrap.classList.add('catalog__wrap');
+
+  main.append(catalog);
+  catalog.append(container);
+  container.append(wrap);
+
   for (let i = 0; i <= books.length; i++) {
-    const cards = new ProductCards(books[i]);
+    const cards = new ProductCards(books[i], wrap);
     cards.createCard();
     initRatings();
   }
 }
 
 createCatalogPage();
-
-//create section for cards
-
-// const catalog = document.createElement('section');
-// catalog.classList.add('catalog');
-
-// const container = document.createElement('div');
-// container.classList.add('container');
-
-// const wrap = document.createElement('div');
-// wrap.classList.add('catalog__wrap');
-
-// main.append(catalog);
-// catalog.append(container);
-// container.append(wrap);
 
 export { ProductCards, createCatalogPage };
