@@ -1,6 +1,7 @@
 .catalog {
+    flex-grow: 2;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.7rem;
 }
 .catalog__wrapper{
@@ -8,4 +9,5 @@
 }
 .filter{
     width: 300px;
+    margin-right: 1em;
 }

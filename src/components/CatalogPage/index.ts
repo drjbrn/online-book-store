@@ -20,7 +20,7 @@ class CatalogPage {
     if (this.mainPage) {
       this.mainPage.innerHTML = '';
       const catalogWrapper = document.createElement('div');
-      catalogWrapper.classList.add('catalog__wrapper');
+      catalogWrapper.classList.add('catalog__wrapper', 'container');
       const form = new Filter(this.data);
       this.filter = form.createFilter();
       this.filter.addEventListener('change', (event) => {
