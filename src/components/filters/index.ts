@@ -26,13 +26,13 @@ class Filter {
     this.genres = [];
     this.categories = [];
     this.resultArr = [];
-    this.init();
   }
   init() {
     this.data.forEach((item) => {
       if (!this.genres.includes(item.genres.toLowerCase())) this.genres.push(item.genres.toLowerCase());
       if (!this.categories.includes(item.categories.toLowerCase())) this.categories.push(item.categories.toLowerCase());
     });
+    return this.createFilter();
   }
   createFilter() {
     const formFilter = document.createElement('form');

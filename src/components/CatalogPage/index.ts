@@ -22,7 +22,7 @@ class CatalogPage {
       const catalogWrapper = document.createElement('div');
       catalogWrapper.classList.add('catalog__wrapper', 'container');
       const form = new Filter(this.data);
-      this.filter = form.createFilter();
+      this.filter = form.init();
       this.filter.addEventListener('change', (event) => {
         event.preventDefault();
         this.render();

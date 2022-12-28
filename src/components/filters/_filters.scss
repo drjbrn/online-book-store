@@ -25,7 +25,7 @@
             transition: .3s;
         }
         & input[type=range]::-moz-range-thumb{
-            -webkit-appearance: none;
+            --webkit-appearance: none;
             pointer-events: all;
             width: 1rem;
             height: 1rem;
