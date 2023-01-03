@@ -25,18 +25,20 @@ class CatalogPage {
       this.filter = form.init();
       this.filter.addEventListener('change', (event) => {
         event.preventDefault();
-        this.render();
+        form.productFiltering();
+        this.render(form.filterData);
       });
+      form.productFiltering();
       this.catalog.classList.add('catalog');
       catalogWrapper.append(this.filter, this.catalog);
       this.mainPage?.append(catalogWrapper);
 
-      this.render();
+      this.render(form.filterData);
     }
   };
-  render() {
+  render(filterData: BooksList[]) {
     this.catalog.innerHTML = '';
-    const cards = this.data.map((item) => {
+    const cards = filterData.map((item) => {
       const card = new ProductCard(item);
       return card.createCard();
     });

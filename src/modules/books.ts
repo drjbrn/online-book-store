@@ -281,7 +281,7 @@ const books: BooksList[] = [
                   Illustrated by the author, this page-turning adventure is designed to capture the imagination of even the most reluctant of young readers. Parents looking for a delightful read-aloud adventure will find it hard to put down. (Word of Caution: readers frequently note that this is a “Please read just one more chapter” book).
                   If your family loves the enchanted lands of our national parks, this series will take you to hidden places and into breathtaking landscapes. If you enjoy movies like National Treasure and Uncharted or mystery adventures like the Hardy Boys and Gary Paulsen’s survival story, Hatchet, you’ll love this first installment of the National Park Mystery Series.
                   Start this epic adventure on your Kindle app, or begin the journey with a paperback copy.`,
-    categories: 'Travel',
+    categories: 'Adventure literature',
     genres: 'Travel',
     isbn13: 9780989711654,
     publishedDate: '2022-05-22',

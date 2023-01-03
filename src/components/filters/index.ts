@@ -20,12 +20,14 @@ class Filter {
   genres: string[];
   categories: string[];
   resultArr: BooksList[];
+  filterData: BooksList[];
 
   constructor(data: BooksList[]) {
     this.data = data;
     this.genres = [];
     this.categories = [];
     this.resultArr = [];
+    this.filterData = [];
   }
   init() {
     this.data.forEach((item) => {
@@ -57,6 +59,18 @@ class Filter {
       input.type = 'checkbox';
       input.name = item;
       input.id = item;
+      const search = new URLSearchParams(location.search);
+      input.checked = search.has(item);
+      input.addEventListener('change', (e) => {
+        const search = new URLSearchParams(location.search);
+        if (!(e.target as HTMLInputElement).checked) {
+          search.delete(item);
+          history.pushState('', '', '?' + search.toString());
+        } else {
+          search.append(item, title.toLowerCase());
+          history.pushState('', '', '?' + search.toString());
+        }
+      });
       inputBox.append(input, label);
       return inputBox;
     });
@@ -224,6 +238,43 @@ class Filter {
     } else {
       toInput.value = `${from}`;
     }
+  }
+
+  productFiltering() {
+    const filteringParameters = new URLSearchParams(location.search);
+    if (location.search) {
+      this.filterData = this.categoriesFilter(filteringParameters, this.data);
+      this.filterData = this.genresFilter(filteringParameters, this.filterData);
+    } else {
+      this.filterData = this.data;
+    }
+    console.log(this.filterData);
+  }
+  categoriesFilter(objSearch: URLSearchParams, data: BooksList[]) {
+    const arr: BooksList[] = [];
+    let couter = 0;
+    objSearch.forEach((value, key) => {
+      data.forEach((dataItem) => {
+        if ('categories' === value) {
+          couter++;
+          if (dataItem.categories.toLowerCase() === key) arr.push(dataItem);
+        }
+      });
+    });
+    return couter > 0 ? arr : data;
+  }
+  genresFilter(objSearch: URLSearchParams, data: BooksList[]) {
+    const arr: BooksList[] = [];
+    let couter = 0;
+    objSearch.forEach((value, key) => {
+      data.forEach((dataItem) => {
+        if ('genres' === value) {
+          couter++;
+          if (dataItem.genres.toLowerCase() === key) arr.push(dataItem);
+        }
+      });
+    });
+    return couter > 0 ? arr : data;
   }
 }
 
