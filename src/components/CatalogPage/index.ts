@@ -26,7 +26,6 @@ class CatalogPage {
       this.filter.addEventListener('change', (event) => {
         event.preventDefault();
         this.render();
-        console.log(event);
       });
       this.catalog.classList.add('catalog');
       catalogWrapper.append(this.filter, this.catalog);
