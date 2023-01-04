@@ -18,10 +18,11 @@ class CatalogPage {
   }
   init = () => {
     if (this.mainPage) {
-      this.mainPage.innerHTML = '';
       const catalogWrapper = document.createElement('div');
-      catalogWrapper.classList.add('catalog__wrapper', 'container');
       const form = new Filter(this.data);
+
+      this.mainPage.innerHTML = '';
+      catalogWrapper.classList.add('catalog__wrapper', 'container');
       this.filter = form.init();
       this.filter.addEventListener('change', (event) => {
         event.preventDefault();
@@ -29,7 +30,7 @@ class CatalogPage {
         this.render(form.filterData);
       });
       form.productFiltering();
-      this.catalog.classList.add('catalog');
+      this.catalog.classList.add('catalog__cards');
       catalogWrapper.append(this.filter, this.catalog);
       this.mainPage?.append(catalogWrapper);
 

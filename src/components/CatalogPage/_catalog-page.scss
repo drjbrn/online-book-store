@@ -1,11 +1,14 @@
 .catalog {
-    flex-grow: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.7rem;
+    &__cards{
+        flex-grow: 2;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.7rem;
+    }
 }
 .catalog__wrapper{
     display: flex;
+    justify-content: space-between;
 }
 .filter{
     width: 300px;

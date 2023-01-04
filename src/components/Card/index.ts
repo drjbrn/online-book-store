@@ -20,7 +20,7 @@ class ProductCard {
   createCard() {
     //main wrapper
     const catalogCards = document.createElement('div');
-    catalogCards.classList.add('catalog__cards', 'card');
+    catalogCards.classList.add('card');
 
     //wrapper for text and btn
     const wrapCards = document.createElement('div');
