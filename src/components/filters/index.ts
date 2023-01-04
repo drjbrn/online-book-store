@@ -12,7 +12,7 @@ interface BooksList {
   image: string;
   image2?: string;
   rating: number;
-  stock?: number;
+  stock: number;
 }
 
 class Filter {
@@ -21,6 +21,8 @@ class Filter {
   categories: string[];
   resultArr: BooksList[];
   filterData: BooksList[];
+  maxPrice: number;
+  maxStock: number;
 
   constructor(data: BooksList[]) {
     this.data = data;
@@ -28,6 +30,12 @@ class Filter {
     this.categories = [];
     this.resultArr = [];
     this.filterData = [];
+    this.maxPrice = this.data.reduce((prev, item) => {
+      return prev < item.price ? item.price : prev;
+    }, 0);
+    this.maxStock = this.data.reduce((prev, item) => {
+      return prev < item.stock ? item.stock : prev;
+    }, 0);
   }
   init() {
     this.data.forEach((item) => {
@@ -43,8 +51,8 @@ class Filter {
     formFilter.append(
       this.createCategoryBlock(this.categories, 'Categories'),
       this.createCategoryBlock(this.genres, 'genres'),
-      this.createRange('price'),
-      this.createRange('Stock')
+      this.createRange('price', 0, this.maxPrice),
+      this.createRange('Stock', 0, this.maxStock)
     );
     return formFilter;
   }
@@ -78,7 +86,7 @@ class Filter {
     category.append(this.createTitle(title), ...inputs);
     return category;
   }
-  createRange(title: string) {
+  createRange(title: string, min: number, max: number) {
     const rangeContainer = document.createElement('div');
     const sliderControl = document.createElement('div');
     const inputStart = document.createElement('input');
@@ -90,18 +98,21 @@ class Filter {
     const formControlTextMax = document.createElement('div');
     const formControlInputMin = document.createElement('input');
     const formControlInputMax = document.createElement('input');
+    const search = new URLSearchParams(location.search);
 
     inputStart.id = `${title.toLowerCase()}Start`;
     inputStart.type = 'range';
-    inputStart.value = '10';
-    inputStart.min = '0';
-    inputStart.max = '100';
+    inputStart.value = search.has(`${title.toLowerCase()}Min`) ? `${search.get(`${title.toLowerCase()}Min`)}` : '10';
+    inputStart.min = `${min}`;
+    inputStart.max = `${max + max / 2}`;
+    inputStart.name = `${title.toLowerCase()}Min`;
 
     inputEnd.id = `${title.toLowerCase()}End`;
     inputEnd.type = 'range';
-    inputEnd.value = '30';
-    inputEnd.min = '0';
-    inputEnd.max = '100';
+    inputEnd.value = search.has(`${title.toLowerCase()}Max`) ? `${search.get(`${title.toLowerCase()}Max`)}` : '30';
+    inputEnd.min = `${min}`;
+    inputEnd.max = `${max + max / 2}`;
+    inputEnd.name = `${title.toLowerCase()}Max`;
 
     formControlMin.classList.add('filter__form-control-container');
     formControlMax.classList.add('filter__form-control-container');
@@ -114,27 +125,37 @@ class Filter {
     formControlInputMin.classList.add('filter__form-control-input');
     formControlInputMin.type = 'number';
     formControlInputMin.id = `${title.toLowerCase()}From`;
-    formControlInputMin.value = '10';
-    formControlInputMin.min = '0';
-    formControlInputMin.max = '100';
+    formControlInputMin.value = search.has(`${title.toLowerCase()}Min`)
+      ? `${search.get(`${title.toLowerCase()}Min`)}`
+      : '10';
+    formControlInputMin.min = `${min}`;
+    formControlInputMin.max = `${max + max / 2}`;
+    formControlInputMin.name = `${title.toLowerCase()}Min`;
     formControlInputMax.classList.add('filter__form-control-input');
     formControlInputMax.type = 'number';
     formControlInputMax.id = `${title.toLowerCase()}To`;
-    formControlInputMax.value = '30';
-    formControlInputMax.min = '0';
-    formControlInputMax.max = '100';
+    formControlInputMax.value = search.has(`${title.toLowerCase()}Max`)
+      ? `${search.get(`${title.toLowerCase()}Max`)}`
+      : '30';
+    formControlInputMax.min = `${min}`;
+    formControlInputMax.max = `${max + max / 2}`;
+    formControlInputMax.name = `${title.toLowerCase()}Max`;
 
     inputStart.addEventListener('input', () => {
       this.controlFromSlider(inputStart, inputEnd, formControlInputMin);
+      this.setValueFromRange(inputStart);
     });
     inputEnd.addEventListener('input', () => {
       this.controlToSlider(inputStart, inputEnd, formControlInputMax);
+      this.setValueFromRange(inputEnd);
     });
     formControlInputMin.addEventListener('input', () => {
       this.controlFromInput(inputStart, formControlInputMin, formControlInputMax, inputEnd);
+      this.setValueFromRange(inputStart);
     });
-    formControlInputMin.addEventListener('input', () => {
+    formControlInputMax.addEventListener('input', () => {
       this.controlToInput(inputEnd, formControlInputMin, formControlInputMax, inputEnd);
+      this.setValueFromRange(formControlInputMax);
     });
 
     sliderControl.classList.add('filter__sliders-control');
@@ -157,13 +178,19 @@ class Filter {
   }
   controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLInputElement) {
     const [from, to] = this.getParsed(fromSlider, toSlider);
-    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+    this.fillSlider(fromSlider, toSlider, '#ffffff', '#25daa5', toSlider);
     if (from > to) {
       fromSlider.value = `${to}`;
       fromInput.value = `${to}`;
     } else {
       fromInput.value = `${from}`;
     }
+  }
+  setValueFromRange(slider: HTMLInputElement) {
+    const search = new URLSearchParams(location.search);
+    if (search.has(`${slider.name}`)) search.delete(`${slider.name}`);
+    search.append(`${slider.name}`, `${slider.value}`);
+    window.history.pushState('', '', '?' + search.toString());
   }
   fillSlider(
     from: HTMLInputElement,
@@ -191,7 +218,7 @@ class Filter {
   }
   controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, toInput: HTMLInputElement) {
     const [from, to] = this.getParsed(fromSlider, toSlider);
-    this.fillSlider(fromSlider, toSlider, '#C6C6C6', '#25daa5', toSlider);
+    this.fillSlider(fromSlider, toSlider, '#ffffff', '#25daa5', toSlider);
     this.setToggleAccessible(toSlider);
     if (from <= to) {
       toSlider.value = `${to}`;
@@ -239,42 +266,38 @@ class Filter {
       toInput.value = `${from}`;
     }
   }
-
   productFiltering() {
     const filteringParameters = new URLSearchParams(location.search);
     if (location.search) {
-      this.filterData = this.categoriesFilter(filteringParameters, this.data);
-      this.filterData = this.genresFilter(filteringParameters, this.filterData);
+      this.filterData = this.categoriesFilter(filteringParameters, this.data, 'categories');
+      this.filterData = this.categoriesFilter(filteringParameters, this.filterData, 'genres');
+      this.filterData = this.rangeFilter(filteringParameters, this.filterData, 'price');
+      this.filterData = this.rangeFilter(filteringParameters, this.filterData, 'stock');
     } else {
       this.filterData = this.data;
     }
-    console.log(this.filterData);
   }
-  categoriesFilter(objSearch: URLSearchParams, data: BooksList[]) {
+  categoriesFilter(objSearch: URLSearchParams, data: BooksList[], categories: 'categories' | 'genres') {
     const arr: BooksList[] = [];
     let couter = 0;
     objSearch.forEach((value, key) => {
       data.forEach((dataItem) => {
-        if ('categories' === value) {
+        if (categories === value) {
           couter++;
-          if (dataItem.categories.toLowerCase() === key) arr.push(dataItem);
+          if (dataItem[categories].toLowerCase() === key) arr.push(dataItem);
         }
       });
     });
     return couter > 0 ? arr : data;
   }
-  genresFilter(objSearch: URLSearchParams, data: BooksList[]) {
+  rangeFilter(objSearch: URLSearchParams, data: BooksList[], categories: 'price' | 'stock') {
     const arr: BooksList[] = [];
-    let couter = 0;
-    objSearch.forEach((value, key) => {
-      data.forEach((dataItem) => {
-        if ('genres' === value) {
-          couter++;
-          if (dataItem.genres.toLowerCase() === key) arr.push(dataItem);
-        }
-      });
+    const min = objSearch.get(`${categories}Min`) || 0;
+    const max = objSearch.get(`${categories}Max`) || 30;
+    data.forEach((dataItem) => {
+      if (dataItem[categories] >= +min && dataItem[categories] <= +max) arr.push(dataItem);
     });
-    return couter > 0 ? arr : data;
+    return arr;
   }
 }
 

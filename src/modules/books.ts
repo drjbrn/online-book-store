@@ -11,7 +11,7 @@ interface BooksList {
   image: string;
   image2?: string;
   rating: number;
-  stock?: number;
+  stock: number;
 }
 
 const books: BooksList[] = [
