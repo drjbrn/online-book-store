@@ -8,6 +8,11 @@
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1.7rem;
     }
+    &__controls{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 .catalog__wrapper{
     display: flex;

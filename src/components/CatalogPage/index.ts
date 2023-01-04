@@ -27,8 +27,7 @@ class CatalogPage {
       this.filter = this.form.init();
       this.filter.addEventListener('change', (event) => {
         event.preventDefault();
-        this.form.productFiltering();
-        this.render(this.form.filterData);
+        this.render();
       });
       this.form.productFiltering();
       catalogBlock.classList.add('catalog');
@@ -37,12 +36,14 @@ class CatalogPage {
       catalogWrapper.append(this.filter, catalogBlock);
       this.mainPage?.append(catalogWrapper);
 
-      this.render(this.form.filterData);
+      this.render();
     }
   };
-  render(filterData: BooksList[]) {
+  render() {
     this.catalog.innerHTML = '';
-    const cards = filterData.map((item) => {
+    this.form.productFiltering();
+    this.form.sortData();
+    const cards = this.form.filterData.map((item) => {
       const card = new ProductCard(item);
       return card.createCard();
     });
@@ -53,7 +54,7 @@ class CatalogPage {
     const catalogControls = document.createElement('div');
 
     catalogControls.classList.add('catalog__controls', 'filter__block');
-    catalogControls.append(this.createSort());
+    catalogControls.append(this.createSort(), this.createSearch());
 
     return catalogControls;
   }
@@ -72,13 +73,30 @@ class CatalogPage {
       urlParams.set('sort', `${(e.target as HTMLInputElement).value}`);
       window.history.pushState('', '', '?' + urlParams.toString());
       this.form.sortData();
-      this.render(this.form.filterData);
+      this.render();
     });
     if (urlParams.get('sort')) {
       sort.value = `${urlParams.get('sort')}`;
       this.form.sortData();
     }
     return sort;
+  }
+  createSearch() {
+    const search = document.createElement('input');
+    const urlParams = new URLSearchParams(location.search);
+
+    search.type = 'search';
+    search.placeholder = 'search products';
+    search.value = `${urlParams.get('search') ? urlParams.get('search') : ''}`;
+    search.classList.add('catalog__search');
+    search.addEventListener('input', (e) => {
+      urlParams.delete('search');
+      if ((e.target as HTMLInputElement).value !== '')
+        urlParams.set('search', `${(e.target as HTMLInputElement).value}`);
+      window.history.pushState('', '', '?' + urlParams.toString());
+      this.render();
+    });
+    return search;
   }
 }
 

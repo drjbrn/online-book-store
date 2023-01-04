@@ -274,6 +274,7 @@ class Filter {
       this.filterData = this.categoriesFilter(filteringParameters, this.filterData, 'genres');
       this.filterData = this.rangeFilter(filteringParameters, this.filterData, 'price');
       this.filterData = this.rangeFilter(filteringParameters, this.filterData, 'stock');
+      this.filterData = this.searchFilter(filteringParameters, this.filterData);
     } else {
       this.filterData = this.data;
     }
@@ -299,6 +300,13 @@ class Filter {
       if (dataItem[categories] >= +min && dataItem[categories] <= +max) arr.push(dataItem);
     });
     return arr;
+  }
+  searchFilter(objSearch: URLSearchParams, data: BooksList[]) {
+    const serchValue = new RegExp(`${objSearch.get('search')?.toLowerCase()}`);
+    if (objSearch.has('search')) {
+      return data.filter((item) => serchValue.test(item.title.toLowerCase()));
+    }
+    return data;
   }
   sortData() {
     const urlParams = new URLSearchParams(location.search);
