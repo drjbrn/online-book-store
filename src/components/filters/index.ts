@@ -48,6 +48,7 @@ class Filter {
     const formFilter = document.createElement('form');
 
     formFilter.classList.add('filter');
+    formFilter.id = 'filter';
     formFilter.append(
       this.createCategoryBlock(this.categories, 'Categories'),
       this.createCategoryBlock(this.genres, 'genres'),
@@ -298,6 +299,16 @@ class Filter {
       if (dataItem[categories] >= +min && dataItem[categories] <= +max) arr.push(dataItem);
     });
     return arr;
+  }
+  sortData() {
+    const urlParams = new URLSearchParams(location.search);
+    const val = urlParams.get('sort');
+    if (val === 'price') this.filterData.sort((a, b) => a.price - b.price);
+    if (val === 'title') this.filterData.sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0));
+    if (val === 'rating') this.filterData.sort((a, b) => a.rating - b.rating);
+    if (val === 'price-r') this.filterData.sort((a, b) => a.price - b.price).reverse();
+    if (val === 'title-r') this.filterData.sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0)).reverse();
+    if (val === 'rating-r') this.filterData.sort((a, b) => a.rating - b.rating).reverse();
   }
 }
 
