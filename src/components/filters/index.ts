@@ -3,11 +3,11 @@ import './_filters.scss';
 interface BooksList {
   title: string;
   authors: string;
-  description?: string;
+  description: string;
   categories: string;
   genres: string;
-  isbn13?: number;
-  publishedDate?: string;
+  isbn13: number;
+  publishedDate: string;
   price: number;
   image: string;
   image2?: string;
@@ -320,7 +320,17 @@ class Filter {
   searchFilter(objSearch: URLSearchParams, data: BooksList[]) {
     const serchValue = new RegExp(`${objSearch.get('search')?.toLowerCase()}`);
     if (objSearch.has('search')) {
-      return data.filter((item) => serchValue.test(item.title.toLowerCase()));
+      return data.filter(
+        (item) =>
+          serchValue.test(item.title.toLowerCase()) ||
+          serchValue.test(item.authors.toLowerCase()) ||
+          serchValue.test(item.description.toLowerCase()) ||
+          serchValue.test(item.categories.toLowerCase()) ||
+          serchValue.test(item.genres.toLowerCase()) ||
+          serchValue.test(item.publishedDate.toLowerCase()) ||
+          serchValue.test(item.price.toString()) ||
+          serchValue.test(item.isbn13.toString())
+      );
     }
     return data;
   }

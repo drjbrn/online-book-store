@@ -2,11 +2,11 @@
 interface BooksList {
   title: string;
   authors: string;
-  description?: string;
+  description: string;
   categories: string;
   genres: string;
-  isbn13?: number;
-  publishedDate?: string;
+  isbn13: number;
+  publishedDate: string;
   price: number;
   image: string;
   image2?: string;
