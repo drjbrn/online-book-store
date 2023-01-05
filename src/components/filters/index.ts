@@ -23,6 +23,7 @@ class Filter {
   filterData: BooksList[];
   maxPrice: number;
   maxStock: number;
+  renderCards: () => void;
   statusFilterData: { [index: string]: number } = {};
   statusData: { [index: string]: number } = {};
   numberFound: { [index: string]: HTMLParagraphElement } = {};
@@ -36,6 +37,7 @@ class Filter {
     this.statusFilterData = {};
     this.statusData = {};
     this.numberFound = {};
+    this.renderCards = () => [];
     this.maxPrice = this.data.reduce((prev, item) => {
       return prev < item.price ? item.price : prev;
     }, 0);
@@ -52,14 +54,14 @@ class Filter {
   }
   createFilter() {
     const formFilter = document.createElement('form');
-
     formFilter.classList.add('filter');
     formFilter.id = 'filter';
     formFilter.append(
       this.createCategoryBlock(this.categories, 'Categories'),
       this.createCategoryBlock(this.genres, 'genres'),
       this.createRange('price', 0, this.maxPrice),
-      this.createRange('Stock', 0, this.maxStock)
+      this.createRange('Stock', 0, this.maxStock),
+      this.createFilterButtons()
     );
     return formFilter;
   }
@@ -191,6 +193,39 @@ class Filter {
     blockTitle.classList.add('filter__title');
     blockTitle.innerText = `${title[0].toUpperCase()}${title.slice(1)}`;
     return blockTitle;
+  }
+  createFilterButtons() {
+    const filterButtonsBox = document.createElement('div');
+    const clearFiltersBtn = document.createElement('input');
+    const saveFiltersBtn = document.createElement('button');
+
+    clearFiltersBtn.type = 'reset';
+    clearFiltersBtn.classList.add('filter__btn');
+    clearFiltersBtn.value = 'Reset';
+    clearFiltersBtn.addEventListener('click', () => {
+      const urlParams = new URLSearchParams(location.host);
+      urlParams.delete('');
+      window.history.pushState('', '', '?');
+      this.renderCards();
+    });
+
+    saveFiltersBtn.classList.add('filter__btn');
+    saveFiltersBtn.textContent = 'Save';
+    saveFiltersBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const btn = e.target as HTMLButtonElement;
+
+      navigator.clipboard.writeText(location.href);
+      btn.classList.toggle('filter__btn-active');
+      btn.innerText = 'Ok!';
+      setTimeout(() => {
+        btn.innerText = 'Save';
+        btn.classList.toggle('filter__btn-active');
+      }, 1000);
+    });
+
+    filterButtonsBox.append(clearFiltersBtn, saveFiltersBtn);
+    return filterButtonsBox;
   }
   controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLInputElement) {
     const [from, to] = this.getParsed(fromSlider, toSlider);

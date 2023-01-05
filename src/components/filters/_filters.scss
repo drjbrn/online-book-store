@@ -74,4 +74,17 @@
         justify-content: space-between;
         flex-wrap: nowrap;
     }
+    &__btn{
+        width: 100%;
+        padding: 0.3em;
+        margin-bottom: 0.5em;
+        border: none;
+        cursor: pointer;
+        transition: .3s;
+        &:hover{
+            background: $btn-light-green;
+            color: $white;
+        }
+    }
+
 }

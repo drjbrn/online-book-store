@@ -45,7 +45,7 @@ class CatalogPage {
       catalogBlock.append(this.createControls(), this.catalog);
       catalogWrapper.append(this.filter, catalogBlock);
       this.mainPage?.append(catalogWrapper);
-
+      this.form.renderCards = this.render.bind(this);
       this.render();
     }
   };
