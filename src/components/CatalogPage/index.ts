@@ -86,7 +86,7 @@ class CatalogPage {
     const urlParams = new URLSearchParams(location.search);
 
     search.type = 'search';
-    search.placeholder = 'search products';
+    search.placeholder = 'Search products';
     search.value = `${urlParams.get('search') ? urlParams.get('search') : ''}`;
     search.classList.add('catalog__search');
     search.addEventListener('input', (e) => {

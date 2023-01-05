@@ -23,13 +23,19 @@ class Filter {
   filterData: BooksList[];
   maxPrice: number;
   maxStock: number;
+  statusFilterData: { [index: string]: number } = {};
+  statusData: { [index: string]: number } = {};
+  numberFound: { [index: string]: HTMLParagraphElement } = {};
 
   constructor(data: BooksList[]) {
     this.data = data;
     this.genres = [];
     this.categories = [];
     this.resultArr = [];
-    this.filterData = [];
+    this.filterData = data;
+    this.statusFilterData = {};
+    this.statusData = {};
+    this.numberFound = {};
     this.maxPrice = this.data.reduce((prev, item) => {
       return prev < item.price ? item.price : prev;
     }, 0);
@@ -59,10 +65,14 @@ class Filter {
   }
   createCategoryBlock(listCategories: string[], title: string) {
     const category = document.createElement('div');
+
     const inputs = listCategories.map((item) => {
-      const inputBox = document.createElement('div');
+      const inputsBox = document.createElement('div');
+      const inputContainer = document.createElement('div');
       const label = document.createElement('label');
       const input = document.createElement('input');
+      const numberFound = document.createElement('p');
+
       label.htmlFor = item;
       label.textContent = `${item[0].toUpperCase()}${item.slice(1)}`;
       input.type = 'checkbox';
@@ -80,8 +90,13 @@ class Filter {
           history.pushState('', '', '?' + search.toString());
         }
       });
-      inputBox.append(input, label);
-      return inputBox;
+      numberFound.innerHTML = `${this.statusFilterData[item]}/${this.statusData[item]}`;
+      this.numberFound[item] = numberFound;
+      inputContainer.classList.add('filter__checkbox-container');
+      inputContainer.append(input, label);
+      inputsBox.classList.add('filter__item');
+      inputsBox.append(inputContainer, numberFound);
+      return inputsBox;
     });
     category.classList.add('filter__block');
     category.append(this.createTitle(title), ...inputs);
@@ -278,6 +293,7 @@ class Filter {
     } else {
       this.filterData = this.data;
     }
+    this.statusFound();
   }
   categoriesFilter(objSearch: URLSearchParams, data: BooksList[], categories: 'categories' | 'genres') {
     const arr: BooksList[] = [];
@@ -317,6 +333,39 @@ class Filter {
     if (val === 'price-r') this.filterData.sort((a, b) => a.price - b.price).reverse();
     if (val === 'title-r') this.filterData.sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0)).reverse();
     if (val === 'rating-r') this.filterData.sort((a, b) => a.rating - b.rating).reverse();
+  }
+  statusFound() {
+    this.statusData = {};
+    this.statusFilterData = {};
+
+    this.data.forEach((item) => {
+      this.statusData[item.categories.toLowerCase()] = this.statusData[item.categories.toLowerCase()]
+        ? ++this.statusData[item.categories.toLowerCase()]
+        : 1;
+      this.statusData[item.genres.toLowerCase()] = this.statusData[item.genres.toLowerCase()]
+        ? ++this.statusData[item.genres.toLowerCase()]
+        : 1;
+    });
+    this.filterData.forEach((item) => {
+      this.statusFilterData[item.categories.toLowerCase()] = this.statusFilterData[item.categories.toLowerCase()]
+        ? ++this.statusFilterData[item.categories.toLowerCase()]
+        : 1;
+      this.statusFilterData[item.genres.toLowerCase()] = this.statusFilterData[item.genres.toLowerCase()]
+        ? ++this.statusFilterData[item.genres.toLowerCase()]
+        : 1;
+    });
+    this.categories.forEach(
+      (item) =>
+        (this.numberFound[item].innerHTML = `${this.statusFilterData[item] ? this.statusFilterData[item] : 0}/${
+          this.statusData[item]
+        }`)
+    );
+    this.genres.forEach(
+      (item) =>
+        (this.numberFound[item].innerHTML = `${this.statusFilterData[item] ? this.statusFilterData[item] : 0}/${
+          this.statusData[item]
+        }`)
+    );
   }
 }
 
