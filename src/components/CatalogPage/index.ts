@@ -69,8 +69,9 @@ class CatalogPage {
     const urlParams = new URLSearchParams(location.search);
     sort.append(val1, val4, val2, val5, val3, val6);
     sort.addEventListener('change', (e) => {
+      const urlParams = new URLSearchParams(location.search);
       urlParams.delete('sort');
-      urlParams.set('sort', `${(e.target as HTMLInputElement).value}`);
+      urlParams.append('sort', `${(e.target as HTMLInputElement).value}`);
       window.history.pushState('', '', '?' + urlParams.toString());
       this.form.sortData();
       this.render();
