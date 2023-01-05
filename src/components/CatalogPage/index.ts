@@ -9,6 +9,8 @@ class CatalogPage {
   filter: HTMLFormElement;
   catalog: HTMLDivElement;
   form: Filter;
+  btnList: HTMLButtonElement;
+  btnGrid: HTMLButtonElement;
 
   constructor(data: BooksList[], mainId: string) {
     this.mainPage = document.getElementById(mainId);
@@ -16,11 +18,14 @@ class CatalogPage {
     this.form = new Filter(data);
     this.catalog = document.createElement('div');
     this.filter = this.form.createFilter();
+    this.btnList = document.createElement('button');
+    this.btnGrid = document.createElement('button');
   }
   init = () => {
     if (this.mainPage) {
       const catalogWrapper = document.createElement('div');
       const catalogBlock = document.createElement('div');
+      const urlParams = new URLSearchParams(location.search);
 
       this.mainPage.innerHTML = '';
       catalogWrapper.classList.add('catalog__wrapper', 'container');
@@ -31,7 +36,12 @@ class CatalogPage {
       });
       this.form.productFiltering();
       catalogBlock.classList.add('catalog');
-      this.catalog.classList.add('catalog__cards');
+
+      if (urlParams.get('view') === 'list') {
+        this.catalog.classList.add('catalog__cards_list');
+      } else {
+        this.catalog.classList.add('catalog__cards_grid');
+      }
       catalogBlock.append(this.createControls(), this.catalog);
       catalogWrapper.append(this.filter, catalogBlock);
       this.mainPage?.append(catalogWrapper);
@@ -54,7 +64,7 @@ class CatalogPage {
     const catalogControls = document.createElement('div');
 
     catalogControls.classList.add('catalog__controls', 'filter__block');
-    catalogControls.append(this.createSort(), this.createSearch());
+    catalogControls.append(this.createSort(), this.createSearch(), this.createViewControlBlock());
 
     return catalogControls;
   }
@@ -98,6 +108,58 @@ class CatalogPage {
       this.render();
     });
     return search;
+  }
+  createViewControlBlock() {
+    const viewBox = document.createElement('div');
+    this.btnList = document.createElement('button');
+    this.btnGrid = document.createElement('button');
+    const urlParams = new URLSearchParams(location.search);
+
+    this.btnGrid.classList.add('catalog__controls-btn');
+    this.btnGrid.dataset.view = 'grid';
+    this.btnGrid.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs>
+    <style>.cls-1{fill:#fff;opacity:0;}.cls-2{fill:#231f20;}</style>
+    </defs><title>grid</title><g id="Layer_2" data-name="Layer 2"><g id="grid"><g id="grid-2" data-name="grid">
+    <rect class="cls-1" width="24" height="24"/>
+    <path class="cls-2" d="M9,3H5A2,2,0,0,0,3,5V9a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V5A2,2,0,0,0,9,3Z"/>
+    <path class="cls-2" d="M19,3H15a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h4a2,2,0,0,0,2-2V5A2,2,0,0,0,19,3Z"/>
+    <path class="cls-2" d="M9,13H5a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V15A2,2,0,0,0,9,13Z"/>
+    <path class="cls-2" d="M19,13H15a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2h4a2,2,0,0,0,2-2V15A2,2,0,0,0,19,13Z"/></g></g></g>
+    </svg>`;
+
+    this.btnList.classList.add('catalog__controls-btn');
+    this.btnGrid.dataset.view = 'list';
+    // eslint-disable-next-line max-len
+    this.btnList.innerHTML = `<svg id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M224,152v48a16.01833,16.01833,0,0,1-16,16H48a16.01833,16.01833,0,0,1-16-16V152a16.01833,16.01833,0,0,1,16-16H208A16.01833,16.01833,0,0,1,224,152ZM208,40H48A16.01833,16.01833,0,0,0,32,56v48a16.01833,16.01833,0,0,0,16,16H208a16.01833,16.01833,0,0,0,16-16V56A16.01833,16.01833,0,0,0,208,40Z"/></svg>`;
+
+    if (urlParams.get('view') === 'list') {
+      this.btnList.classList.add('catalog__controls-btn_active');
+    } else {
+      this.btnGrid.classList.add('catalog__controls-btn_active');
+    }
+    this.btnList.addEventListener('click', () => this.chengeView('list'));
+    this.btnGrid.addEventListener('click', () => this.chengeView('grid'));
+    viewBox.classList.add('catalog__controls-views');
+    viewBox.append(this.btnGrid, this.btnList);
+    return viewBox;
+  }
+  chengeView(str: string) {
+    const urlParams = new URLSearchParams(location.search);
+
+    urlParams.delete('view');
+    urlParams.set('view', str);
+
+    history.pushState('', '', '?' + urlParams.toString());
+    if (urlParams.get('view') === 'list') {
+      this.btnList.classList.toggle('catalog__controls-btn_active');
+      this.btnGrid.className = 'catalog__controls-btn';
+      this.catalog.className = 'catalog__cards_list';
+    } else {
+      this.btnGrid.classList.toggle('catalog__controls-btn_active');
+      this.btnList.className = 'catalog__controls-btn';
+      this.catalog.className = 'catalog__cards_grid';
+    }
+    this.render();
   }
 }
 
