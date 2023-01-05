@@ -329,6 +329,7 @@ class Filter {
           serchValue.test(item.genres.toLowerCase()) ||
           serchValue.test(item.publishedDate.toLowerCase()) ||
           serchValue.test(item.price.toString()) ||
+          serchValue.test(item.stock.toString()) ||
           serchValue.test(item.isbn13.toString())
       );
     }
