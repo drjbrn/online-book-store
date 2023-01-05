@@ -11,6 +11,7 @@ class CatalogPage {
   form: Filter;
   btnList: HTMLButtonElement;
   btnGrid: HTMLButtonElement;
+  totalFound: HTMLParagraphElement;
 
   constructor(data: BooksList[], mainId: string) {
     this.mainPage = document.getElementById(mainId);
@@ -20,6 +21,7 @@ class CatalogPage {
     this.filter = this.form.createFilter();
     this.btnList = document.createElement('button');
     this.btnGrid = document.createElement('button');
+    this.totalFound = document.createElement('p');
   }
   init = () => {
     if (this.mainPage) {
@@ -57,14 +59,14 @@ class CatalogPage {
       const card = new ProductCard(item);
       return card.createCard();
     });
-
-    this.catalog.append(...cards);
+    this.totalFound.innerText = `Total: ${this.form.filterData.length}`;
+    cards.length > 0 ? this.catalog.append(...cards) : this.catalog.append(this.createError());
   }
   createControls() {
     const catalogControls = document.createElement('div');
 
     catalogControls.classList.add('catalog__controls', 'filter__block');
-    catalogControls.append(this.createSort(), this.createSearch(), this.createViewControlBlock());
+    catalogControls.append(this.createSort(), this.createSearch(), this.createViewControlBlock(), this.totalFound);
 
     return catalogControls;
   }
@@ -108,6 +110,14 @@ class CatalogPage {
       this.render();
     });
     return search;
+  }
+  createError() {
+    const err = document.createElement('p');
+
+    err.classList.add('catalog__error');
+    err.innerText = 'Product not found';
+
+    return err;
   }
   createViewControlBlock() {
     const viewBox = document.createElement('div');
