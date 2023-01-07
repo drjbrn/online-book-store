@@ -5,13 +5,13 @@ interface BooksList {
   description?: string;
   categories?: string;
   genres?: string;
-  isbn13?: number;
+  isbn13: string | number;
   publishedDate?: string;
   price: number;
   image: string;
   image2?: string;
   rating: number;
-  stock?: number;
+  stock: number;
 }
 
 const books: BooksList[] = [
