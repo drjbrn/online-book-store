@@ -1,6 +1,6 @@
 import { books, BooksList } from '../../modules/books';
 import { ProductInCart, SummaryCart } from './render-cart';
-import { renderModal } from '../modal/modal';
+import { renderModal } from '../ModalWindow/modal';
 import {
   checkName,
   checkPhone,
@@ -9,7 +9,7 @@ import {
   checkDate,
   checkCVV,
   checkNumberCard
-} from '../modal/check-input';
+} from '../ModalWindow/check-input';
 
 window.addEventListener('click', function (event) {
   const target = event.target as HTMLElement;
@@ -85,7 +85,7 @@ btnBasket.addEventListener('click', function () {
   renderCart();
 });
 
-function renderCart() {
+export function renderCart() {
   main.innerHTML = '';
   sectionCart.innerHTML = '';
   cartProductList.innerHTML = '';
