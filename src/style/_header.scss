@@ -20,16 +20,11 @@
     position: relative;
 
     &-total {
-      display: none;
-      justify-content: center;
-      align-items: center;
       font-size: 0.7rem;
-      min-width: 1rem;
-      min-height: 1rem;
-      border-radius: 50%;
+      font-weight: 600;
       position: absolute;
-      left: 1rem;
-      bottom: 1rem;
+      top: 0.7rem;
+      left: 1.5rem;
     }
   }
 }
