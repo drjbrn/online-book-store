@@ -63,12 +63,14 @@
         stroke: $white; 
   
         &:hover {
-          @include animation-for-btn ($btn-dark-green, background 0.3s);
+          background: $btn-dark-green;
+          transition: background 0.3s;
         }
   
         &:active {
-          @include animation-for-btn ($white, background 0.3s);
+          background: $white;
           stroke: $btn-dark-green;
+          transition: stroke 0.3s;
         }
       }
     }
