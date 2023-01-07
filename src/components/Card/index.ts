@@ -1,31 +1,28 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
-import { books, BooksList } from '../../modules/books';
-import { initRatings } from './rating-stars';
+import './_card.scss';
+import { BooksList } from '../../modules/books';
 
-class ProductCards {
+class ProductCard {
   title: string;
   authors: string;
   price: number;
   image: string;
   rating: number;
   isbn13: string | number;
-  section: HTMLElement;
 
-  constructor(card: BooksList, section: HTMLElement) {
+  constructor(card: BooksList) {
     this.title = card?.title;
     this.authors = card?.authors;
     this.price = card?.price;
     this.image = card?.image;
     this.rating = card?.rating;
-    this.section = section;
     this.isbn13 = card?.isbn13;
   }
 
   createCard() {
     //main wrapper
     const catalogCards = document.createElement('div');
-    catalogCards.classList.add('catalog__cards', 'card');
+    catalogCards.classList.add('card');
 
     //wrapper for text and btn
     const wrapCards = document.createElement('div');
@@ -64,6 +61,7 @@ class ProductCards {
 
     const ratingActive = document.createElement('div');
     ratingActive.classList.add('rating__active');
+    ratingActive.style.width = `${Number(this.rating) / 0.05}%`;
 
     const ratingItems = document.createElement('div');
     ratingItems.classList.add('rating__items');
@@ -130,32 +128,8 @@ class ProductCards {
     wrapCards.append(cardDesc, btnCards);
     cardDesc.append(titleBook, authorsBook, cardRating, wrapPrice);
 
-    this.section.append(catalogCards);
+    return catalogCards;
   }
 }
 
-function createCatalogPage() {
-  const main = document.querySelector('.main') as HTMLElement;
-  const catalog = document.createElement('section');
-  catalog.classList.add('catalog');
-
-  const container = document.createElement('div');
-  container.classList.add('container');
-
-  const wrap = document.createElement('div');
-  wrap.classList.add('catalog__wrap');
-
-  main.append(catalog);
-  catalog.append(container);
-  container.append(wrap);
-
-  for (let i = 0; i <= books.length; i++) {
-    const cards = new ProductCards(books[i], wrap);
-    cards.createCard();
-    initRatings();
-  }
-}
-
-createCatalogPage();
-
-export { ProductCards, createCatalogPage };
+export default ProductCard;
