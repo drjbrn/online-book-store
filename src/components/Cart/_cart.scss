@@ -1,0 +1,123 @@
+.cart {
+  display: grid;
+  grid-template-columns: 25vw 70vw;
+  gap: 1rem;
+
+  &__products {
+    border: 2px solid $btn-dark-green;
+    border-radius: 12px;
+    box-sizing: content-box;
+  }
+}
+
+.summary {
+  border: 2px solid $btn-dark-green;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1.5rem 0;
+
+  &__title {
+    text-decoration: underline $btn-dark-green;
+  }
+
+  &__promocode {
+    border: 2px solid $btn-dark-green;
+    color: $btn-dark-green;
+    border-radius: 2rem;
+    padding: 0.4rem;
+    text-align: center;
+    outline: none;
+
+    &::placeholder {
+      color: $btn-dark-green;
+    }
+  }
+
+  &__btn {
+    background: $btn-light-green;
+    border: 2px solid $btn-dark-green;
+    border-radius: 12px;
+    color: $white;
+    border-radius: 2rem;
+    padding: 0.4rem 2rem;
+    text-align: center;
+
+    &:hover {
+      @include animation-for-btn ($btn-dark-green, background 0.3s);
+    }
+
+    &:active {
+      @include animation-for-btn ($white, background 0.3s);
+      color: $btn-dark-green;
+    }
+  }
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 25px 100px 300px 150px 100px;
+  align-items: center;
+  justify-content: space-around;
+  margin: 25px 0;
+
+  &__number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: $btn-light-green;
+    border: 2px solid $btn-dark-green;
+    color: $white;
+  }
+
+  &__img {
+    width: 100px;
+    height: 150px;
+    border-radius: 12px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: $btn-light-green;
+    border: 2px solid $btn-dark-green;
+    color: $white;
+
+    &:hover {
+      @include animation-for-btn ($btn-dark-green, background 0.3s);
+    }
+
+    &:active {
+      @include animation-for-btn ($white, background 0.3s);
+      color: $btn-dark-green;
+    }
+  }
+}
