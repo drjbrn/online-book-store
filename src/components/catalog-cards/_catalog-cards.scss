@@ -71,14 +71,12 @@
       stroke: $white; 
 
       &:hover {
-        background: $btn-dark-green;
-        transition: background 0.3s;
+        @include animation-for-btn ($btn-dark-green, background 0.3s);
       }
 
       &:active {
-        background: $white;
+        @include animation-for-btn ($white, background 0.3s);
         stroke: $btn-dark-green;
-        transition: stroke 0.3s;
       }
     }
   }
