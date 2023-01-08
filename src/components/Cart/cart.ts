@@ -10,6 +10,7 @@ import {
   checkCVV,
   checkNumberCard
 } from '../ModalWindow/check-input';
+import CatalogPage from '../CatalogPage/index';
 
 window.addEventListener('click', function (event) {
   const target = event.target as HTMLElement;
@@ -41,7 +42,6 @@ interface cartList {
 
 const cart: cartList[] = JSON.parse(localStorage.getItem('Cart') as string) || [];
 const countInCart = document.querySelector('.header__button-total') as HTMLElement;
-console.log(cart);
 
 function addToCart(id: string) {
   if (cart.some((item) => item[0].isbn13 === Number(id))) {
@@ -199,10 +199,11 @@ function checkInputInModal() {
       setTimeout(() => {
         main.innerHTML = '';
         localStorage.clear();
-        //create new catalog page
+        const catalogPage = new CatalogPage(books, 'main');
+        catalogPage.init();
       }, 3000);
     } else {
-      alert('You must written on all fields');
+      alert('Please make sure all fields are filled in correctly.');
     }
   });
 }
