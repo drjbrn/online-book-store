@@ -65,7 +65,7 @@ export class ProductInCart {
     productWrap.classList.add('product__wrap');
 
     const priceProduct = document.createElement('div');
-    priceProduct.classList.add('product__price');
+    priceProduct.classList.add('product__cost');
     priceProduct.innerHTML = `Price: ${this.price} $`;
 
     const stockProduct = document.createElement('div');
