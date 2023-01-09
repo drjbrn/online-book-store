@@ -82,7 +82,11 @@ cartProductList.classList.add('cart__products');
 
 btnBasket.addEventListener('click', function () {
   main.innerHTML = '';
-  renderCart();
+  if (JSON.parse(localStorage.getItem('Cart') as string) === null) {
+    clearCart();
+  } else {
+    renderCart();
+  }
 });
 
 export function renderCart() {
@@ -110,6 +114,14 @@ export function renderCart() {
     const cartProd = new ProductInCart(item[0], item.numberOfUnits, cart.indexOf(item) + 1);
     cartProductList.append(cartProd.renderCart());
   });
+}
+
+function clearCart() {
+  main.innerHTML = '';
+  const titleAboutEmptyCart = document.createElement('h2');
+  titleAboutEmptyCart.classList.add('cart__title_empty');
+  titleAboutEmptyCart.innerHTML = 'Sorry, your shopping cart is empty';
+  main.append(titleAboutEmptyCart);
 }
 
 function changeProductCount(id: string, action: 'plus' | 'minus') {
@@ -196,9 +208,11 @@ function checkInputInModal() {
     ) {
       form.classList.add('modal__accept');
       form.innerHTML = `Thank you! <br> Your order is accepted!`;
+      localStorage.clear();
       setTimeout(() => {
         main.innerHTML = '';
-        localStorage.clear();
+        clearCart();
+        countInCart.innerHTML = '';
         const catalogPage = new CatalogPage(books, 'main');
         catalogPage.init();
       }, 3000);
