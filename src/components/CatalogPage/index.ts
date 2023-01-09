@@ -1,7 +1,7 @@
 import './_catalog-page.scss';
 import { BooksList } from '../../modules/books';
 import ProductCard from '../Card/index';
-import Filter from '../Filters/index';
+import Filter from '../Filter/index';
 import '../Cart/cart';
 
 class CatalogPage {
