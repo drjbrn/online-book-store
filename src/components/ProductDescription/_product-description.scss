@@ -1,0 +1,41 @@
+@import '../../style/vars';
+
+.product {
+    &__nav{
+        text-align: center;
+        margin-bottom: 2em;
+    }
+    &__box{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__slider{
+        flex-basis: 40%;
+    }
+    &__images{
+        display: block;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    &__previev{
+        width: 20%;
+        margin-right: 0.3em;
+    }
+    &__text{
+        flex-basis: 55%;
+        height: 100%;
+    }
+    &__title{
+        margin-bottom: 1em;
+        color: $btn-dark-green;
+    }
+    &__genres{
+        margin-bottom: 0.5em;
+        font-weight: 500;
+        color: $btn-light-green;
+    }
+    &__price{
+        font-size: 2rem;
+        margin-top: 2em;
+    }
+}

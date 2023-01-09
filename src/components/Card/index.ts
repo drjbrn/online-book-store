@@ -104,6 +104,10 @@ class ProductCard {
     <path d="M27.5 15.15L24.25 18.75C23.0784 20.039 21.6504 21.0689 20.0574 21.7737C18.4645 22.4784 16.7419 22.8425 15 22.8425C13.2581 22.8425 11.5355 22.4784 9.94257 21.7737C8.34964 21.0689 6.92159 20.039 5.75 18.75L2.5 15.15L5.4 11.675C6.57313 10.2683 8.04109 9.13653 9.70001 8.35988C11.3589 7.58323 13.1683 7.18066 15 7.18066C16.8317 7.18066 18.6411 7.58323 20.3 8.35988C21.9589 9.13653 23.4269 10.2683 24.6 11.675L27.5 15.15Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M15.1125 17.825C16.9075 17.825 18.3625 16.4258 18.3625 14.7C18.3625 12.9741 16.9075 11.575 15.1125 11.575C13.3176 11.575 11.8625 12.9741 11.8625 14.7C11.8625 16.4258 13.3176 17.825 15.1125 17.825Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel"/>
     </svg>`;
+    btnLook.addEventListener('click', () => {
+      history.pushState('', '', this.isbn13 as string);
+      location.href = this.isbn13 as string;
+    });
 
     const btnLike = document.createElement('button');
     btnLike.classList.add('card__btn_like');
