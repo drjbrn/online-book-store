@@ -1,0 +1,134 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+.card {
+    box-sizing: content-box;
+    width: 250px;
+    height: 90%;
+    border: 1px solid $gray-border;
+    border-radius: 12px;
+    padding: 16px;
+    &__wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 16px;
+    }
+  
+    &__img {
+      margin: 0 auto;
+      width: 150px;
+      height: 250px;
+      border-radius: 12px;
+    }
+  
+    &__title {
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0 0 4px;
+    }
+  
+    &__author {
+      font-weight: 400;
+      font-size: 0.7rem;
+      line-height: 1.2;
+      margin: 0 0 15px;
+    }
+  
+    &__value {
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      display: flex;
+      align-items:center;
+      margin: 15px 0;
+  
+      &_symbol {
+        margin-left: 5px;
+      }
+    }
+  
+    &__btn {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+  
+      &_shop,
+      &_like,
+      &_look {
+        background: $btn-light-green;
+        border: 2px solid $btn-dark-green;
+        border-radius: 12px;
+        padding: 3px;
+        fill: none;
+        stroke: $white; 
+  
+        &:hover {
+          background: $btn-dark-green;
+          transition: background 0.3s;
+        }
+  
+        &:active {
+          background: $white;
+          stroke: $btn-dark-green;
+          transition: stroke 0.3s;
+        }
+      }
+    }
+  }
+  
+  
+  .rating {
+    display: flex;
+    align-items: flex-end;
+    line-height: 0.75;
+    font-size: 1.2rem;
+  
+    &__body {
+      position: relative;
+  
+      &::before {
+        content: '★★★★★';
+        display: block;
+      }
+    }
+  
+    &__active {
+      position: absolute;
+      width: 0%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+  
+      &::before {
+        content: '★★★★★';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        color: $yellow-stars;
+      }
+    }
+  
+    &__items {
+      display:flex;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  
+    &__item {
+      flex: 0 0 20%;
+      height: 100%;
+      opacity: 0;
+    }
+  
+    &__value {
+      font-size: 0.8rem;
+      padding: 0 0 0 10px;
+    }
+  }
